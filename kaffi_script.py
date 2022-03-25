@@ -48,12 +48,12 @@ while(user_command != "0"):
 
     if user_command == "1":
         print("Legge til kaffesmaking")
-        distillery = input("Skriv inn brenneri: ")
-        coffee_name = input("Skriv inn navn på kaffe: ")
-        points = int(input("Skriv inn antall poeng (0-10): "))
-        notes = input("Skriv inn smaksnotater: ")
-        today = date.today().strftime("%d.%m.%Y")
         try: 
+            distillery = input("Skriv inn brenneri: ")
+            coffee_name = input("Skriv inn navn på kaffe: ")
+            points = int(input("Skriv inn antall poeng (0-10): "))
+            notes = input("Skriv inn smaksnotater: ")
+            today = date.today().strftime("%d.%m.%Y")
             db.new_coffee_review(distillery, coffee_name, points, notes, today)
         except:
             print("\nDet har skjedd en feil. Kaffesmaking ble ikke lagt til. ")
@@ -63,7 +63,7 @@ while(user_command != "0"):
         top_list = db.view_top_list()
         rank = 1
         for tuple in top_list:
-            print(f"{rank}: | {tuple[0]} | Antall kaffer smakt: {tuple[1]}")
+            print(f"{rank}: {tuple[0]} | Antall kaffer smakt: {tuple[1]}")
             rank += 1
         print()
     
@@ -99,6 +99,3 @@ while(user_command != "0"):
 
     else:
         print("Du skrev inn noe feil")
-
-        
-        

@@ -1,5 +1,6 @@
 import sqlite3
 from db_handler import db_handler
+from datetime import date
 
 con = sqlite3.connect("nykaffi.db")
 db = db_handler(con)
@@ -54,9 +55,9 @@ while(user_command != "0"):
         notes = input("Skriv inn smaksnotater: ")
         #! Det står i brukerhistorien at dato ikke er 
         #! en del av inputen her.
-        date = input("Skriv inn dato: ")
+        today = date.today().strftime("%d.%m.%Y")
         try: 
-            db.new_coffee_review(distillery, coffee_name, points, notes, date)
+            db.new_coffee_review(distillery, coffee_name, points, notes, today)
         except:
             print("\nDet har skjedd en feil. Kaffesmaking ble ikke lagt til. ")
     

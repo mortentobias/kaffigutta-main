@@ -1,4 +1,3 @@
-from ast import Try
 import sqlite3
 from db_handler import db_handler
 
@@ -40,7 +39,7 @@ while(user_command != "0"):
     print("""\nSkriv inn:
 0 - for å avslutte programmet
 1 - for å legge til en kaffesmaking
-2 - for å se toppliste
+2 - for å se toppliste over mest aktive brukere
 3 - for å se liste over kaffe som gir mest for pengene
 4 - for å søke etter kaffe basert på beskrivelse
 5 - for å søke etter kaffe basert på opprinnelsesland og foredlingsmetode
@@ -51,7 +50,7 @@ while(user_command != "0"):
         print("Legge til kaffesmaking")
         distillery = input("Skriv inn brenneri: ")
         coffee_name = input("Skriv inn navn på kaffe: ")
-        points = int(input("Skriv inn antall poeng: "))
+        points = int(input("Skriv inn antall poeng (0-10): "))
         notes = input("Skriv inn smaksnotater: ")
         #! Det står i brukerhistorien at dato ikke er 
         #! en del av inputen her.
@@ -64,8 +63,10 @@ while(user_command != "0"):
     elif user_command == "2":
         print("Se toppliste over mest aktive brukere")
         top_list = db.view_top_list()
+        rank = 1
         for tuple in top_list:
-            print(tuple)
+            print(f"{rank}: {tuple[0]} | Antall kaffer smakt: {tuple[1]}")
+            rank += 1
         print()
     
     elif user_command == "3":

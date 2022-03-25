@@ -73,7 +73,8 @@ class db_handler:
         LEFT JOIN kaffesmaking ON ferdigbrentKaffe.kaffeID = kaffesmaking.kaffeID
         WHERE ferdigbrentKaffe.beskrivelse LIKE ? OR kaffesmaking.smaksnotater LIKE ?"""
         cursor.execute(sql_string, (complete_search_word, complete_search_word))
-
+        return cursor.fetchall()
+        
     # må ha med kaffegård, ferdigbrentkaffe, kaffeparti
     def country_search(self, country, washed):
         if washed == "ja":

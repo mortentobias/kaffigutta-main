@@ -5,7 +5,6 @@ from datetime import date
 con = sqlite3.connect("nykaffi.db")
 db = db_handler(con)
 
-
 print("\nVelkommen til kaffiguttas KaffiDB:)")
 print("""Du kan:
 1. legge til en kaffesmaking
@@ -53,8 +52,6 @@ while(user_command != "0"):
         coffee_name = input("Skriv inn navn på kaffe: ")
         points = int(input("Skriv inn antall poeng (0-10): "))
         notes = input("Skriv inn smaksnotater: ")
-        #! Det står i brukerhistorien at dato ikke er 
-        #! en del av inputen her.
         today = date.today().strftime("%d.%m.%Y")
         try: 
             db.new_coffee_review(distillery, coffee_name, points, notes, today)
@@ -66,7 +63,7 @@ while(user_command != "0"):
         top_list = db.view_top_list()
         rank = 1
         for tuple in top_list:
-            print(f"{rank}: {tuple[0]} | Antall kaffer smakt: {tuple[1]}")
+            print(f"{rank}: | {tuple[0]} | Antall kaffer smakt: {tuple[1]}")
             rank += 1
         print()
     
@@ -78,24 +75,24 @@ while(user_command != "0"):
         inneholde brennerinavn, pris, gjennomsnittscore for hver kaffe
         """
         most_valuable = db.find_most_valuable()
+        rank = 1
         for tuple in most_valuable:
-            print(tuple)
+            print(f"{rank}: {tuple[0]} | {tuple[1]} | {tuple[2]} | {tuple[3]}")
+            rank += 1
         print()
 
     elif user_command == "4":
         search = input("Søk etter: ")
         searched = db.description_search(search_word=search)
         for tuple in searched:
-            print(tuple)
-        print()
+            print(f"{tuple[0]} | {tuple[1]}")
     
     elif user_command == "5":
         country = input("Søk etter kaffe fra hvilket land?: ")
         washed = input("Søke etter foredlingmetode 'vasket'? (ja/nei)").lower()
         searched = db.country_search(country, washed)
         for tuple in searched:
-            print(tuple)
-        print()
+            print(f"{tuple[0]} | {tuple[1]}")
 
     elif user_command == "0":
         con.close()

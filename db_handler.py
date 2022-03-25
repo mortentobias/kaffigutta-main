@@ -56,6 +56,7 @@ class db_handler:
         LEFT JOIN kaffesmaking ON ferdigbrentKaffe.kaffeID = kaffesmaking.kaffeID
         GROUP BY ferdigbrentKaffe.navn
         ORDER BY AVG(kaffesmaking.poengsum)/ferdigbrentKaffe.kgpris_nok DESC
+        LIMIT 10
         """
         cursor.execute(sql_string)
         all_rows = cursor.fetchall()

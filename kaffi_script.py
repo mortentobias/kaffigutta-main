@@ -5,14 +5,8 @@ from datetime import date
 con = sqlite3.connect("nykaffi.db")
 db = db_handler(con)
 
-print("\nVelkommen til kaffiguttas KaffiDB:)")
-print("""Du kan:
-1. legge til en kaffesmaking
-2. se toppliste over mest aktive brukere
-3. se liste over kaffe som gir mest for pengene
-4. søke etter kaffe basert på beskrivelse
-5. søke etter kaffe basert på foredlingsmetode
-""")
+print("\nVelkommen til kaffiguttas KaffiDB:)\n")
+
 
 user_command = ""
 

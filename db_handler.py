@@ -58,7 +58,12 @@ class db_handler:
         ORDER BY AVG(kaffesmaking.poengsum)/ferdigbrentKaffe.kgpris_nok DESC
         """
         cursor.execute(sql_string)
-        return cursor.fetchall()
+        all_rows = cursor.fetchall()
+        rating_not_null = []
+        for row in all_rows:
+            if row[3] != None:
+                rating_not_null.append(row)
+        return rating_not_null
     
     def description_search(self, search_word):
         complete_search_word = f"%{search_word}%"
@@ -68,8 +73,6 @@ class db_handler:
         LEFT JOIN kaffesmaking ON ferdigbrentKaffe.kaffeID = kaffesmaking.kaffeID
         WHERE ferdigbrentKaffe.beskrivelse LIKE ? OR kaffesmaking.smaksnotater LIKE ?"""
         cursor.execute(sql_string, (complete_search_word, complete_search_word))
-        return cursor.fetchall()
-
 
     # må ha med kaffegård, ferdigbrentkaffe, kaffeparti
     def country_search(self, country, washed):
